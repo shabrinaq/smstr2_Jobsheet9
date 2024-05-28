@@ -158,4 +158,22 @@ public class SingleLinkedList21 {
             }
         }
     }
+
+    public void insertBefore(int key, int input) {
+        Node21 ndInput = new Node21(input, null);
+        Node21 temp = head;
+        if (head.data == key) {
+            addFirst(input);
+            return;
+        }
+        while (temp.next != null && temp.next.data != key) {
+            temp = temp.next;
+        }
+        if (temp.next == null) {
+            System.out.println("Key not found! try again.");
+        } else {
+            ndInput.next = temp.next;
+            temp.next = ndInput;
+        }
+    }
 }
