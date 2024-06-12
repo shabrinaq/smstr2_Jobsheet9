@@ -3,76 +3,58 @@
  */
 public class BankCustomerLinkedList21 {
 
-    NodeBankCustomer21 head;
+    NodeBankCustomer21 front, rear;
 
-    public void addCustomer(String Name, String Address, String CustomerAccountNumber) {
-        NodeBankCustomer21 newNodeBankCustomer21 = new NodeBankCustomer21(Name, Address, CustomerAccountNumber);
-        
-        if (head == null) {
-            head = newNodeBankCustomer21;
-        } else {
-            NodeBankCustomer21 temp = head;
-            while (temp.next != null) {
-                temp = temp.next;
-            }
-            temp.next = newNodeBankCustomer21;
-        }
+    public BankCustomerLinkedList21() {
+        this.front = this.rear = null;
     }
 
-    public void displayCustomers() {
-        if (head == null) {
-            System.out.println("Empty Customer List");
+    public void enqueue(String Name, String Address, String CustomerAccountNumber) {
+        NodeBankCustomer21 newNodeBankCustomer21 = new NodeBankCustomer21(Name, Address, CustomerAccountNumber);
+        
+        if (this.rear == null) {
+            this.front = this.rear = newNodeBankCustomer21;
+            return;
+        } 
+        this.rear.next = newNodeBankCustomer21;
+        this.rear = newNodeBankCustomer21;
+    }
+
+    public void dequeue() {
+        if (this.front == null) {
+            System.out.println("Empty queue, no customers to Deleted");
+            return;
+        }
+        NodeBankCustomer21 temp = this.front;
+        this.front = this.front.next;
+        if (this.front == null) {
+            this.rear = null;
+        }
+        System.out.println("Customer with account number " + temp.CustomerAccountNumber + " Deleted");
+    }
+
+    public void displayQueue() {
+        if (front == null) {
+            System.out.println("Empty Queue");
         } else {
-            NodeBankCustomer21 temp = head;
+            NodeBankCustomer21 temp = front;
             while (temp != null) {
                 System.out.println("Name            : " + temp.Name);
                 System.out.println("Address         : " + temp.Address);
-                System.out.println("AccountNumber   : " + temp.CustomerAccountNumber);
+                System.out.println("Account Number  : " + temp.CustomerAccountNumber);
                 temp = temp.next;
             }
         }
     }
 
-    public void searchCustomer(String customerAccountNumber) {
-        NodeBankCustomer21 temp = head;
-        boolean found = false;
-        while (temp != null) {
-            if (temp.CustomerAccountNumber.equals(customerAccountNumber)) {
-                System.out.println("Name            : " + temp.Name);
-                System.out.println("Address         : " + temp.Address);
-                System.out.println("AccountNumber   : " + temp.CustomerAccountNumber);
-                found = true;
-                break;
-            }
-            temp = temp.next;
-        }
-        if (!found) {
-            System.out.println("Customer with account number " + customerAccountNumber + " Not Found");
-        }
-    }
-
-    public void deleteCustomer(String customerAccountNumber) {
-        if (head == null) {
-            System.out.println("Empty Customer List");
-            return;
-        }
-
-        if (head.CustomerAccountNumber.equals(customerAccountNumber)) {
-            head = head.next;
-            System.out.println("Customer with account number " + customerAccountNumber + " Deleted");
-            return;
-        }
-
-        NodeBankCustomer21 temp = head;
-        while (temp.next != null && !temp.next.CustomerAccountNumber.equals(customerAccountNumber)) {
-            temp = temp.next;
-        }
-
-        if (temp.next == null) {
-            System.out.println("Customer with account number " + customerAccountNumber + " Not Found");
+    public void peek() {
+        if (front == null) {
+            System.out.println("Empty Queue");
         } else {
-            temp.next = temp.next.next;
-            System.out.println("Customer with account number " + customerAccountNumber + " Deleted");
+            System.out.println("Nasabah di depan antrian:");
+            System.out.println("Name            : " + front.Name);
+            System.out.println("Address         : " + front.Address);
+            System.out.println("Account Number  : " + front.CustomerAccountNumber);
         }
     }
 }

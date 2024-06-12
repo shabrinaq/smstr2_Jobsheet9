@@ -6,7 +6,7 @@ import java.util.Scanner;
 public class MainBankCustomer21 {
 
     public static void main(String[] args) {
-        BankCustomerLinkedList21 customerList = new BankCustomerLinkedList21();
+        BankCustomerLinkedList21 customerQueue = new BankCustomerLinkedList21();
         Scanner sc = new Scanner(System.in);
         int choose;
 
@@ -14,10 +14,10 @@ public class MainBankCustomer21 {
             System.out.println("==============================================");
             System.out.println("Menu");
             System.out.println("==============================================");
-            System.out.println("1. Add Customer");
-            System.out.println("2. Show All Customers");
-            System.out.println("3. Search Customer Based on Account Number");
-            System.out.println("4. Delete Customer Based on Account Number");
+            System.out.println("1. Add Customer to Queue (Enqueue)");
+            System.out.println("2. Remove Customer from Queue (Dequeue)");
+            System.out.println("3. Show All Customers in Queue");
+            System.out.println("4. View the Customer at the Front of the Queue (Peek)");
             System.out.println("5. Exit");
             System.out.print("choose Menu (1-5): ");
             choose = sc.nextInt();
@@ -33,25 +33,17 @@ public class MainBankCustomer21 {
                     System.out.print("Enter Account Number  : ");
                     String customerAccountNumber = sc.nextLine();
 
-                    customerList.addCustomer(name, address, customerAccountNumber);
+                    customerQueue.enqueue(name, address, customerAccountNumber);
                     break;
                 case 2:
                     System.out.println("==============================================");
-                    customerList.displayCustomers();
+                    customerQueue.dequeue();
                     break;
                 case 3:
-                    System.out.println("==============================================");
-                    System.out.print("Enter The Desired Account Number: ");
-                    String searchAccountNumber = sc.nextLine();
-
-                    customerList.searchCustomer(searchAccountNumber);
+                    customerQueue.displayQueue();
                     break;
                 case 4:
-                    System.out.println("==============================================");
-                    System.out.print("Enter The Account Number To Be Deleted: ");
-                    String deleteAccountNumber = sc.nextLine();
-                    
-                    customerList.deleteCustomer(deleteAccountNumber);
+                    customerQueue.peek();
                     break;
                 case 5:
                     System.out.println("-------------------------");
